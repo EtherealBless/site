@@ -3,8 +3,8 @@ import Paragraph from './paragraph';
 
 export default function Home() {
     return (
-        <div className='flex flex-col h-screen gap-16'>
-            <div className='text-white w-1/2 self-center flex gap-3 flex-col'>
+        <div className='flex flex-col h-screen w-1/2 gap-16'>
+            <div className='text-white self-center flex gap-3 flex-col'>
                 <Paragraph firstInChapter={true}>
                     Современные технологии достигли такого уровня, что
                     экономическая повестка сегодняшнего дня прекрасно подходит
