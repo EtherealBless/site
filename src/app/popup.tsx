@@ -1,6 +1,7 @@
 'use client';
 import React, { Ref, useContext, useEffect, useRef, useState } from 'react';
 import { RemarksContext, useRemarksContext } from './contexts/remarksContext';
+import styles from './styles/popup.styles.module.css';
 
 export type PopupProps = {
     side: 'left' | 'right';
@@ -19,6 +20,14 @@ export default function Popup(popupProps: PopupProps) {
             setBaseTop(ref.current.offsetTop);
         }
     }, [ref]);
+
+    // play animation when the remark changes
+    useEffect(() => {
+        if (remark && ref !== undefined) {
+            ref.current?.classList.add(styles?.['popup-animation']);
+            setTimeout(() => { ref.current?.classList.remove(styles?.['popup-animation']); }, 1000);
+        }
+    }, [remark.top]);
 
     return (
         <div

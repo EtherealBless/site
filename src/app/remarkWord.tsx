@@ -28,8 +28,8 @@ export default function RemarkWord({ name, description }: RemarkWordProps) {
             onClick={() => {
                 remarks?.setRemark({ name, description }, ref.current?.offsetTop || 0);
 
-                console.log(remarks);
-                console.log(ref.current?.offsetTop);
+                // console.log(remarks);
+                // console.log(ref.current?.offsetTop);
             }}
         >
             {name}
