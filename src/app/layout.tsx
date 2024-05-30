@@ -4,7 +4,10 @@ import { EB_Garamond } from 'next/font/google';
 
 import './globals.css';
 import Header from './header';
-import Popup, { PopupProps } from './popup';
+import Popup from './popup';
+import { useContext, useEffect } from 'react';
+import RemarksContext, { RemarksProvider } from './contexts/remarksContext';
+import Providers from './contexts/providers';
 
 const inter = Inter({ subsets: ['latin'] });
 const ebGaramond = EB_Garamond({
@@ -26,21 +29,15 @@ export default function RootLayout({
             <body
                 className={`${ebGaramond.className} mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8`}
             >
-                <Header />
-                <div className='flex flex-row justify-center'>
-                    <Popup
-                        remark={{ name: 'Popup', description: 'Popup' }}
-                        side='left'
-                        top={220}
-                    />
+                <Providers>
+                    <Header />
+                    <div className='flex flex-row justify-center'>
+                        <Popup side={'left'} />
 
-                    {children}
-                    <Popup
-                        remark={{ name: 'Popup', description: 'Popup' }}
-                        side='right'
-                        top={120}
-                    />
-                </div>
+                        {children}
+                        <Popup side={'right'} />
+                    </div>
+                </Providers>
             </body>
         </html>
     );

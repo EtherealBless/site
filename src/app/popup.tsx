@@ -1,52 +1,36 @@
 'use client';
-import React from 'react';
+import React, { Ref, useContext, useEffect, useRef, useState } from 'react';
+import { RemarksContext, useRemarksContext } from './contexts/remarksContext';
 
-interface Remark {
-    name: string;
-    description: string;
-}
-
-interface Remarks {
-    left: Remark;
-    right: Remark;
-}
-
-export const RemarksContext = React.createContext<Remarks>({
-    left: { name: '', description: '' },
-    right: { name: '', description: '' },
-});
-
-export const RemarksProvider: React.FC<{ children: React.ReactNode }> = ({
-    children,
-}: {
-    children: React.ReactNode;
-}): React.JSX.Element => {
-    const [remark, setPopups] = React.useState<Remarks>({
-        left: { name: '', description: '' },
-        right: { name: '', description: '' },
-    });
-
-    return (
-        <RemarksContext.Provider value={remark}>
-            {children}
-        </RemarksContext.Provider>
-    );
+export type PopupProps = {
+    side: 'left' | 'right';
 };
 
-export interface PopupProps {
-    remark: Remark;
-    side: 'left' | 'right';
-    top: number;
-}
-
 export default function Popup(popupProps: PopupProps) {
+    const remarks = useRemarksContext();
+    const remark = remarks?.[popupProps.side];
+
+    const ref = useRef<HTMLDivElement>(null);
+
+    const [baseTop, setBaseTop] = useState(0);
+
+    useEffect(() => {
+        if (ref.current) {
+            setBaseTop(ref.current.offsetTop);
+        }
+    }, [ref]);
+
     return (
         <div
-            style={{ top: `${popupProps.top}px` }}
-            className={`text-white border-white border-solid border-2 text-align flex flex-col px-3 relative h-fit ${popupProps.side === 'left' ? 'left-0 mr-5' : 'right-0 ml-5'}`}
+            ref={ref}
+            style={{
+                top: `${remark.top - baseTop}px`,
+                visibility: `${remark.remark.name !== '' ? 'visible' : 'hidden'}`,
+            }}
+            className={`text-white border-white border-solid border-2 text-align flex flex-col px-3 relative h-fit w-1/5 ${popupProps.side === 'left' ? 'left-0 mr-5' : 'right-0 ml-5'}`}
         >
-            <div className='font-bold text-xl'>{popupProps.remark.name}</div>
-            <div className='text-lg'>{popupProps.remark.description}</div>
+            <div className='font-bold text-xl'>{remark.remark.name}</div>
+            <div className='text-lg'>{remark.remark.description}</div>
         </div>
     );
 }

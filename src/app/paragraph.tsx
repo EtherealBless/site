@@ -15,6 +15,7 @@ export default function Paragraph( props: ParagraphProps ) {
         <p
             className={`text-xl text-white text-justify ${firstInChapter ? 'first-letter:font-bold first-letter:text-[5rem] first-letter:float-left first-letter:leading-[3rem]' : ''}`}
         >
+
             {children}
         </p>
     );
