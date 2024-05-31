@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:8000';
+const apiUrl = 'https://my-json-server.typicode.com/EtherealBless/site/';
 
 interface ApiWapper {
     get: (url: string) => Promise<any>;
