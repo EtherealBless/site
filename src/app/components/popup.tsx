@@ -1,7 +1,7 @@
 'use client';
 import React, { Ref, useContext, useEffect, useRef, useState } from 'react';
-import { RemarksContext, useRemarksContext } from './contexts/remarksContext';
-import styles from './styles/popup.styles.module.css';
+import { RemarksContext, useRemarksContext } from '../contexts/remarksContext';
+import styles from '../styles/popup.styles.module.css';
 
 export type PopupProps = {
     side: 'left' | 'right';

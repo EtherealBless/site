@@ -3,11 +3,12 @@ import { Inter } from 'next/font/google';
 import { EB_Garamond } from 'next/font/google';
 
 import './globals.css';
-import Header from './header';
-import Popup from './popup';
+import Header from './components/header';
+import Popup from './components/popup';
 import { useContext, useEffect } from 'react';
 import RemarksContext, { RemarksProvider } from './contexts/remarksContext';
 import Providers from './contexts/providers';
+import Navbar from './components/navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 const ebGaramond = EB_Garamond({
@@ -26,12 +27,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
+            <head>
+                <title>My blog</title>
+            </head>
             <body
                 className={`${ebGaramond.className} mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8`}
             >
+                <Header />
+                <Navbar />
+
                 <Providers>
-                    <Header />
-                    <div className='flex flex-row justify-center'>
+                    <div className='flex flex-row justify-center pt-8'>
                         <Popup side={'left'} />
 
                         {children}

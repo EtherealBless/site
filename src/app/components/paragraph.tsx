@@ -13,7 +13,7 @@ export default function Paragraph( props: ParagraphProps ) {
 
     return (
         <p
-            className={`text-xl text-white text-justify ${firstInChapter ? 'first-letter:font-bold first-letter:text-[5rem] first-letter:float-left first-letter:leading-[3rem]' : ''}`}
+            className={`text-xl text-white text-justify ${firstInChapter ? 'first-letter:font-bold min-w-16 first-letter:text-[5rem] first-letter:float-left first-letter:leading-[3rem]' : ''}`}
         >
 
             {children}
